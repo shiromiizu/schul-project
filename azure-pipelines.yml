@@ -8,6 +8,6 @@ steps:
 - task: vercel-deployment-task@3
   inputs:
     vercelProjectId: 'prj_5suGAcQ33Z8BGENBtNYMcBAOmApK'
-    vercelOrgId: 'team_ABcnQrJLm1PIXk2DxHtjTknN'
+    vercelTeamId: 'team_ABcnQrJLm1PIXk2DxHtjTknN'
     vercelToken: $(VERCEL_TOKEN)
     production: true
