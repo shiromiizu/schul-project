@@ -35,7 +35,7 @@ export function RegisterForm() {
       <CardHeader>
         <CardTitle className="text-2xl">Registrieren</CardTitle>
         <CardDescription>
-          Erstellen Sie ein neues Konto. E-Mail muss auf "schueler.6072-fuerth.de" oder "6072-fuerth.de" enden.
+          Erstellen Sie ein neues Konto. E-Mail muss auf &#34;schueler.6072-fuerth.de&#34; oder &#34;6072-fuerth.de&#34; enden.
         </CardDescription>
       </CardHeader>
       <CardContent>
