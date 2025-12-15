@@ -1,0 +1,156 @@
+<!--
+  Template: Teacher Feedback Notification Email
+  Usage: Replace placeholders with actual values before sending.
+  Placeholders:
+    {{feedback_title}}       – Title of the feedback (from FeedbackSchema.title)
+    {{feedback_category}}    – Category (from FeedbackSchema.category)
+    {{feedback_description}} – Full description (from FeedbackSchema.description)
+    {{feedback_link}}        – Absolute URL to view the full feedback (optional)
+    {{submitted_at}}         – Submission date/time (readable)
+    {{school_name}}          – Organization/School name
+-->
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>New Feedback Submitted</title>
+    <!--[if mso]>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:AllowPNG/>
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+    <![endif]-->
+
+    <style>
+      /* Reset */
+      body, table, td, a { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+      table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+      img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+      table { border-collapse: collapse !important; }
+      body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+      /* Apple link color reset */
+      a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+      /* Dark mode friendly */
+      @media (prefers-color-scheme: dark) {
+        .bg { background-color: #0f172a !important; }
+        .card { background-color: #111827 !important; border-color: #1f2937 !important; }
+        .text { color: #e5e7eb !important; }
+        .muted { color: #9ca3af !important; }
+        .btn { background-color: #2563eb !important; }
+      }
+      /* Mobile */
+      @media screen and (max-width: 600px) {
+        .container { width: 100% !important; }
+        .px { padding-left: 16px !important; padding-right: 16px !important; }
+      }
+    </style>
+  </head>
+  <body class="bg" style="background-color:#f3f4f6;">
+    <div role="article" aria-roledescription="email" aria-label="New feedback notification" lang="en">
+      <!-- Preheader (will be hidden in most clients) -->
+      <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">
+        New feedback: {{feedback_title}} · Category: {{feedback_category}} · Submitted {{submitted_at}}
+      </div>
+
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td align="center" style="padding:24px;">
+            <table class="container" width="600" style="width:600px; max-width:600px;">
+              <tr>
+                <td class="px" style="padding: 0 24px;">
+                  <!-- Header -->
+                  <table width="100%" style="margin-bottom:16px;">
+                    <tr>
+                      <td align="left">
+                        <div class="text" style="font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:24px; font-weight:700; color:#111827;">
+                          {{school_name}}
+                        </div>
+                        <div class="muted" style="font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:12px; color:#6b7280;">Feedback Notification</div>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Card -->
+                  <table class="card" width="100%" style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden;">
+                    <tr>
+                      <td style="padding:24px;">
+                        <h1 class="text" style="margin:0 0 8px 0; font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:20px; font-weight:700; color:#111827;">
+                          New feedback submitted
+                        </h1>
+                        <p class="muted" style="margin:0 0 16px 0; font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:14px; color:#6b7280;">
+                          A new feedback was submitted on {{submitted_at}}.
+                        </p>
+
+                        <!-- Summary box -->
+                        <table width="100%" style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px;">
+                          <tr>
+                            <td style="padding:16px;">
+                              <div class="muted" style="font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">
+                                Title
+                              </div>
+                              <div class="text" style="font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:14px; color:#111827; line-height:1.5; margin-bottom:12px;">
+                                {{feedback_title}}
+                              </div>
+                              <div class="muted" style="font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">
+                                Category
+                              </div>
+                              <div class="text" style="font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:14px; color:#111827; line-height:1.5; margin-bottom:12px;">
+                                {{feedback_category}}
+                              </div>
+                              <div class="muted" style="font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">
+                                Description
+                              </div>
+                              <div class="text" style="font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:14px; color:#111827; line-height:1.5; white-space:pre-wrap;">
+                                {{feedback_description}}
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <!-- CTA -->
+                        <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="margin-top:20px;">
+                          <tr>
+                            <td align="left">
+                              <a class="btn" href="{{feedback_link}}" target="_blank" style="background:#2563eb; border:1px solid #2563eb; color:#ffffff; display:inline-block; font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; line-height:1.2; text-decoration:none; padding:12px 18px; border-radius:8px;">
+                                View full feedback
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <!-- Meta info -->
+                        <p class="muted" style="margin:16px 0 0 0; font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:12px; color:#6b7280;">
+                          If the button doesn’t work, copy and paste this URL into your browser:
+                          <br>
+                          <a href="{{feedback_link}}" style="color:#2563eb; text-decoration:underline; word-break:break-all;">{{feedback_link}}</a>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Footer -->
+                  <table width="100%" style="margin-top:16px;">
+                    <tr>
+                      <td align="left">
+                        <p class="muted" style="margin:0; font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-size:12px; color:#9ca3af;">
+                          You are receiving this email because you are listed as a feedback recipient.
+                          If you believe this was sent to you by mistake, please contact your administrator.
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+  </html>

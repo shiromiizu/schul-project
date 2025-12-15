@@ -2,6 +2,7 @@
 import nodemailer from 'nodemailer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {FeedbackSchema} from "@/lib/schemas";
 
 const SMTP_SERVER_HOST = process.env.SMTP_SERVER_HOST;
 const SMTP_SERVER_USERNAME = process.env.SMTP_SERVER_USERNAME;
@@ -18,30 +19,40 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-function fill(template: string, map: Record<string, string>): string {
-    return template.replace(/{{\s*(\w+)\s*}}/g, (_, k) => map[k] ?? '')
-}
-
-export async function notifyTeacherFeedback() {
+export async function notifyTeacherFeedback(data: FeedbackSchema) {
     const templatePath = path.join(process.cwd(), 'lib/email-templates/teacher-feedback.html')
     const template = await fs.readFile(templatePath, 'utf8')
 
     const html = fill(template, {
-        teacher_name: 'Ms. Smith',
-        student_name: 'John Doe',
-        course_name: 'Math 8A',
-        feedback_excerpt: 'I found the algebra unit quite engaging... ',
-        feedback_link: 'https://yourapp.example.com/feedback/123',
+        feedback_title: data.title,
+        feedback_category: data.category,
+        feedback_description: data.description,
+        feedback_link: 'https://yourapp.example.com/portal/feedback',
         submitted_at: new Date().toLocaleString(),
         school_name: 'B3 Echo School',
     })
 
     await sendMail({
         email: 'no-reply@yourapp.example.com',
-        sendTo: 'ms.smith@example.com',
-        subject: 'New feedback submitted',
-        text: 'A new feedback was submitted. Please view it in the portal.',
+        sendTo: process.env.SITE_MAIL_RECEIVER,
+        subject: `Feedback submitted: ${data.title} (${data.category})`,
+        text: `A new feedback was submitted.\n\nTitle: ${data.title}\nCategory: ${data.category}\nSubmitted at: ${new Date().toLocaleString()}\n\nPlease view it in the portal.`,
         html,
+    })
+}
+
+function fill(template: string, map: Record<string, string>): string {
+    const escape = (v: string) =>
+        v
+            .replaceAll(/&/g, '&amp;')
+            .replaceAll(/</g, '&lt;')
+            .replaceAll(/>/g, '&gt;')
+            .replaceAll(/"/g, '&quot;')
+            .replaceAll(/'/g, '&#39;');
+
+    return template.replace(/{{\s*(\w+)\s*}}/g, (_: string, k: string) => {
+        const raw = map[k];
+        return raw != null ? escape(String(raw)) : ''
     })
 }
 
