@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { headers } from 'next/headers'
 import { createClient } from '@/utils/supabase/server'
 import { registerSchema } from '@/lib/schemas'
 
@@ -28,10 +29,14 @@ export async function signup(prevState: RegisterFormState, formData: FormData): 
 
   const { email, password } = validatedFields.data
   const supabase = await createClient()
+  const origin = (await headers()).get('origin')
 
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      emailRedirectTo: `${origin}/auth/callback?next=/registered`,
+    },
   })
 
   if (error) {
@@ -65,6 +70,5 @@ export async function signup(prevState: RegisterFormState, formData: FormData): 
     }
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/')
+  redirect('/verify-email')
 }
