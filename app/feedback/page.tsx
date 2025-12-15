@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { saveFeedback } from '@/app/feedback/action';
+import { BackButton } from '@/components/back-button';
 
 export default function FeedbackPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,6 +73,7 @@ export default function FeedbackPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
+        <BackButton className="mb-4" />
         <div className="bg-white shadow-md rounded-lg p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Feedback einreichen</h1>
           <p className="text-gray-600 mb-8">Teilen Sie uns Ihr Feedback mit.</p>
