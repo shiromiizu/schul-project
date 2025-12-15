@@ -21,6 +21,12 @@ export const registerSchema = z.object({
   password: z.string().min(6, {
     message: 'Passwort muss mindestens 6 Zeichen lang sein.',
   }),
+  confirmPassword: z.string().min(6, {
+    message: 'Passwort muss mindestens 6 Zeichen lang sein.',
+  }),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwörter stimmen nicht überein",
+  path: ["confirmPassword"],
 });
 
 export const feedbackSchema = z.object({
