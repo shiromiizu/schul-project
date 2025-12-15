@@ -40,9 +40,10 @@ export async function signup(prevState: RegisterFormState, formData: FormData): 
   })
 
   if (error) {
+    console.error('Signup error:', error)
     return {
       errors: {
-        root: [error.message],
+        root: ['Registrierung fehlgeschlagen. Möglicherweise existiert bereits ein Konto mit dieser E-Mail.'],
       },
     }
   }
@@ -64,7 +65,7 @@ export async function signup(prevState: RegisterFormState, formData: FormData): 
       // For now, we'll return an error.
       return {
         errors: {
-          root: ['Failed to create user profile: ' + profileError.message],
+          root: ['Fehler beim Erstellen des Benutzerprofils: ' + profileError.message],
         },
       }
     }

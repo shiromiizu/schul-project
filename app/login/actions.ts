@@ -35,9 +35,10 @@ export async function login(prevState: LoginFormState, formData: FormData): Prom
   })
 
   if (error) {
+    console.error('Login error:', error)
     return {
       errors: {
-        root: [error.message],
+        root: ['Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort.'],
       },
     }
   }

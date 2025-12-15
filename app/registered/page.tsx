@@ -13,18 +13,18 @@ export default function RegisteredPage() {
               <CheckCircle className="h-6 w-6 text-green-600" />
             </div>
           </div>
-          <CardTitle className="text-2xl">Email Verified</CardTitle>
+          <CardTitle className="text-2xl">E-Mail verifiziert</CardTitle>
           <CardDescription>
-            Your email has been successfully verified.
+            Ihre E-Mail wurde erfolgreich verifiziert.
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <p className="text-sm text-muted-foreground">
-            You can now log in to your account.
+            Sie können sich jetzt in Ihr Konto einloggen.
           </p>
           <Button asChild className="w-full">
             <Link href="/login">
-              Go to Login
+              Zum Login
             </Link>
           </Button>
         </CardContent>

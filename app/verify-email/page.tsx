@@ -13,18 +13,18 @@ export default function VerifyEmailPage() {
               <Mail className="h-6 w-6 text-blue-600" />
             </div>
           </div>
-          <CardTitle className="text-2xl">Check your email</CardTitle>
+          <CardTitle className="text-2xl">E-Mail überprüfen</CardTitle>
           <CardDescription>
-            We&apos;ve sent you a verification link. Please check your email to verify your account.
+            Wir haben Ihnen einen Bestätigungslink gesendet. Bitte überprüfen Sie Ihre E-Mails, um Ihr Konto zu verifizieren.
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <p className="text-sm text-muted-foreground">
-            Once verified, you will be able to log in to your account.
+            Sobald Sie verifiziert sind, können Sie sich in Ihr Konto einloggen.
           </p>
           <Button asChild variant="outline" className="w-full">
             <Link href="/login">
-              Back to Login
+              Zurück zum Login
             </Link>
           </Button>
         </CardContent>
