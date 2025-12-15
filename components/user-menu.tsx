@@ -3,6 +3,8 @@
 import { User } from "@supabase/supabase-js"
 import { LogOut, User as UserIcon } from "lucide-react"
 import { logout } from "@/app/actions"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +20,13 @@ interface UserMenuProps {
 }
 
 export function UserMenu({ user }: UserMenuProps) {
-  if (!user) return null
+  if (!user) {
+    return (
+      <Button asChild variant="ghost">
+        <Link href="/login">Anmelden</Link>
+      </Button>
+    )
+  }
 
   return (
     <DropdownMenu>
