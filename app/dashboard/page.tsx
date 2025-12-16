@@ -1,10 +1,8 @@
-import StudentDashboardComponent from "@/components/studentDashboardComponent";
-import { NextPage } from "next";
+import StudentDashboard from '@/components/student-dashboard';
+import { NextPage } from 'next';
 
 const DashboardPage: NextPage = () => {
-  return (
-    <StudentDashboardComponent/>
-    );
-}
+  return <StudentDashboard />;
+};
 
 export default DashboardPage;
