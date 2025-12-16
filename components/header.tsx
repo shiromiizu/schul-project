@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server"
 import { UserMenu } from "./user-menu"
+import { ModeToggle } from "./mode-toggle"
 import Link from "next/link"
 
 export async function Header() {
@@ -17,7 +18,7 @@ export async function Header() {
   }
 
   return (
-    <header className="w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="w-full flex h-14 items-center justify-between px-4">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
@@ -29,6 +30,7 @@ export async function Header() {
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
           </div>
+          <ModeToggle />
           <UserMenu user={user} role={role} />
         </div>
       </div>
