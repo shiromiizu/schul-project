@@ -13,7 +13,7 @@ export async function markAsRead(feedbackId: string) {
 
   if (error) throw error;
 
-  revalidatePath(`/student/feedback/${feedbackId}`);
+  revalidatePath(`/feedback/${feedbackId}`);
 }
 
 export async function addReply(feedbackId: string, message: string) {
@@ -41,5 +41,5 @@ export async function addReply(feedbackId: string, message: string) {
 
   if (updateError) throw updateError;
 
-  revalidatePath(`/student/feedback/${feedbackId}`);
+  revalidatePath(`/feedback/${feedbackId}`);
 }

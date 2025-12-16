@@ -64,7 +64,7 @@ export const FeedbackSubmission = () => {
         setSelectedCategory('');
         setDescriptionLength(0);
         setIsSubmitting(false);
-        router.push(`/student/feedback/${result.data.id}`);
+        router.push(`/feedback/${result.data.id}`);
         return 'Feedback erfolgreich übermittelt!';
       },
       error: () => {

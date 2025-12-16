@@ -58,3 +58,15 @@ export type FeedbackReply = {
     full_name: string;
   };
 };
+
+export type PetitionStatus = 'pending' | 'approved' | 'rejected';
+
+export type Petition = {
+  id: string;
+  title: string;
+  description: string;
+  status: PetitionStatus;
+  created_at: Date;
+  student_name: string;
+  votes: number;
+};

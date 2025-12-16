@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { addReply, markAsRead } from '@/app/student/feedback/[id]/actions';
+import { addReply, markAsRead } from '@/app/feedback/[id]/actions';
 import { CheckCircle, Loader2, Send } from 'lucide-react';
 import { toast } from 'sonner';
 

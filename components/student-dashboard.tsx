@@ -53,11 +53,7 @@ const StudentDashboard = ({ feedbacks }: Props) => {
                 if (index >= 3) return;
                 const isOpen = !feedback.seenByTeacher;
                 return (
-                  <Link
-                    key={feedback.id}
-                    href={`/student/feedback/${feedback.id}`}
-                    className="block"
-                  >
+                  <Link key={feedback.id} href={`/feedback/${feedback.id}`} className="block">
                     <Card className="border hover:shadow-md transition-shadow">
                       <CardContent className="p-5">
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
