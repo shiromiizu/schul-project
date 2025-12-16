@@ -21,7 +21,7 @@ export async function saveFeedback(feedbackData: FeedbackSchema) {
       ...feedbackData,
       student_id: user.id,
     },
-  ]);
+  ]).select().single();
 
   await notifyTeacherFeedback(feedbackData);
 

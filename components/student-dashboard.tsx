@@ -53,8 +53,9 @@ const StudentDashboard = ({ feedbacks }: Props) => {
                 if (index >= 3) return;
                 const isOpen = !feedback.seenByTeacher;
                 return (
-                  <Card key={feedback.id} className="border hover:shadow-md transition-shadow">
-                    <CardContent className="p-5">
+                  <Link key={feedback.id} href={`/feedback/${feedback.id}`} className="block">
+                    <Card className="border hover:shadow-md transition-shadow">
+                      <CardContent className="p-5">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                         <div className="flex-1 space-y-3 overflow-hidden">
                           <div className="flex items-start justify-between gap-3">
@@ -101,6 +102,7 @@ const StudentDashboard = ({ feedbacks }: Props) => {
                       </div>
                     </CardContent>
                   </Card>
+                  </Link>
                 );
               })
             )}

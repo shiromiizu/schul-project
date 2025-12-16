@@ -47,3 +47,14 @@ export type Feedback = {
   seenByTeacher: boolean;
   created_at: Date;
 };
+
+export type FeedbackReply = {
+  id: string;
+  feedback_id: string;
+  teacher_id: string;
+  message: string;
+  created_at: Date;
+  teacher?: {
+    full_name: string;
+  };
+};

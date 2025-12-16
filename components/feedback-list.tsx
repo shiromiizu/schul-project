@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { CategoryRecord } from "@/lib/types"
+import Link from "next/link"
 
 type Feedback = {
   id: string
@@ -31,32 +32,34 @@ export function FeedbackList({ feedbacks }: FeedbackListProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {feedbacks.map((feedback) => (
-        <Card key={feedback.id}>
-          <CardHeader>
-            <div className="flex justify-between items-start gap-2">
-              <CardTitle className="text-lg font-semibold leading-none tracking-tight">
-                {feedback.title}
-              </CardTitle>
-              <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                {getCategoryLabel(feedback.category)}
-              </span>
-            </div>
-            <CardDescription>
-              {new Date(feedback.created_at).toLocaleDateString('de-DE', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground line-clamp-3">
-              {feedback.description}
-            </p>
-          </CardContent>
-        </Card>
+        <Link key={feedback.id} href={`/feedback/${feedback.id}`} className="block h-full">
+          <Card className="h-full hover:shadow-md transition-shadow">
+            <CardHeader>
+              <div className="flex justify-between items-start gap-2">
+                <CardTitle className="text-lg font-semibold leading-none tracking-tight">
+                  {feedback.title}
+                </CardTitle>
+                <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+                  {getCategoryLabel(feedback.category)}
+                </span>
+              </div>
+              <CardDescription>
+                {new Date(feedback.created_at).toLocaleDateString('de-DE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground line-clamp-3">
+                {feedback.description}
+              </p>
+            </CardContent>
+          </Card>
+        </Link>
       ))}
     </div>
   )

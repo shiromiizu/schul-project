@@ -1,61 +1,60 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { useRouter, usePathname, useSearchParams } from "next/navigation"
-import { Filter, ArrowUpDown, CheckCircle2 } from "lucide-react"
+import * as React from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { ArrowUpDown, Filter } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
-import { CategoryRecord } from "@/lib/types"
-import { Separator } from "@/components/ui/separator"
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { CategoryRecord } from '@/lib/types';
 
 export function FeedbackFilters() {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const category = searchParams.get("category") || "all"
-  const sort = searchParams.get("sort") || "oldest"
-  const hideAnswered = searchParams.get("hideAnswered") !== "false" // Default true
+  const category = searchParams.get('category') || 'all';
+  const sort = searchParams.get('sort') || 'oldest';
+  const hideAnswered = searchParams.get('hideAnswered') !== 'false'; // Default true
 
   const createQueryString = React.useCallback(
     (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
-      return params.toString()
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
     },
     [searchParams]
-  )
+  );
 
   const handleCategoryChange = (value: string) => {
-    router.push(pathname + "?" + createQueryString("category", value))
-  }
+    router.push(pathname + '?' + createQueryString('category', value));
+  };
 
   const handleSortChange = (value: string) => {
-    router.push(pathname + "?" + createQueryString("sort", value))
-  }
+    router.push(pathname + '?' + createQueryString('sort', value));
+  };
 
   const handleHideAnsweredChange = (checked: boolean) => {
-    router.push(pathname + "?" + createQueryString("hideAnswered", checked.toString()))
-  }
+    router.push(pathname + '?' + createQueryString('hideAnswered', checked.toString()));
+  };
 
   const getCategoryLabel = (val: string) => {
-    if (val === 'all') return 'Alle Kategorien'
-    const found = Object.values(CategoryRecord).find(c => c.value === val)
-    return found ? found.label : val
-  }
+    if (val === 'all') return 'Alle Kategorien';
+    const found = Object.values(CategoryRecord).find((c) => c.value === val);
+    return found ? found.label : val;
+  };
 
   const getSortLabel = (val: string) => {
-    if (val === 'newest') return 'Neueste zuerst'
-    if (val === 'oldest') return 'Älteste zuerst'
-    return val
-  }
+    if (val === 'newest') return 'Neueste zuerst';
+    if (val === 'oldest') return 'Älteste zuerst';
+    return val;
+  };
 
   return (
     <div className="flex flex-col sm:flex-row gap-4 p-2 bg-card border rounded-lg shadow-sm items-center mb-6">
@@ -103,7 +102,10 @@ export function FeedbackFilters() {
 
       <div className="hidden sm:block h-6 w-px bg-border" />
 
-      <div className="flex items-center space-x-2 px-3 py-2 w-full sm:w-auto hover:bg-accent/50 rounded-md cursor-pointer" onClick={() => handleHideAnsweredChange(!hideAnswered)}>
+      <div
+        className="flex items-center space-x-2 px-3 py-2 w-full sm:w-auto hover:bg-accent/50 rounded-md cursor-pointer"
+        onClick={() => handleHideAnsweredChange(!hideAnswered)}
+      >
         <Checkbox
           id="hideAnswered"
           checked={hideAnswered}
@@ -115,5 +117,5 @@ export function FeedbackFilters() {
         </Label>
       </div>
     </div>
-  )
+  );
 }
