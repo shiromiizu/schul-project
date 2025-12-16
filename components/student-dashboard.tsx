@@ -45,7 +45,7 @@ const statusConfig = {
   },
 };
 
-const StudentDashboardComponent = () => {
+const StudentDashboard = () => {
   return (
     <div className="w-4/5 mx-auto my-8">
       <div className="space-y-6">
@@ -133,4 +133,4 @@ const StudentDashboardComponent = () => {
   );
 };
 
-export default StudentDashboardComponent;
+export default StudentDashboard;
