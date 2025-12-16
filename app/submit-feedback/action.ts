@@ -2,7 +2,7 @@
 
 import { createClient } from '@/utils/supabase/server';
 import { FeedbackSchema } from '@/lib/schemas';
-import {notifyTeacherFeedback} from '@/lib/send-mail'
+import { notifyTeacherFeedback } from '@/lib/send-mail';
 
 export async function saveFeedback(feedbackData: FeedbackSchema) {
   const supabase = await createClient();
@@ -16,14 +16,14 @@ export async function saveFeedback(feedbackData: FeedbackSchema) {
     throw new Error('Nicht authentifiziert');
   }
 
-  const { data, error } = await supabase.from('feedback').insert([
+  const { error } = await supabase.from('feedback').insert([
     {
       ...feedbackData,
       student_id: user.id,
     },
   ]);
 
-  await notifyTeacherFeedback(data, String(user.email));
+  await notifyTeacherFeedback(feedbackData);
 
-  return { data, error };
+  return { feedbackData, error };
 }
