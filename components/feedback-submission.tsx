@@ -21,8 +21,10 @@ import { saveFeedback } from '@/app/submit-feedback/action';
 import { BackButton } from '@/components/back-button';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 export const FeedbackSubmission = () => {
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<CategoryValue | ''>('');
   const [showAllErrors, setShowAllErrors] = useState(false);
@@ -52,12 +54,13 @@ export const FeedbackSubmission = () => {
 
     toast.promise(saveFeedback(feedbackData), {
       loading: 'Loading...',
-      success: () => {
+      success: (data) => {
         reset();
         setShowAllErrors(false);
         setSelectedCategory('');
         setDescriptionLength(0);
         setIsSubmitting(false);
+        router.push(`/feedback/${data.id}`);
         return 'Feedback erfolgreich übermittelt!';
       },
       error: (err) => {

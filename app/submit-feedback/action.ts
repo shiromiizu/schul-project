@@ -20,7 +20,11 @@ export async function saveFeedback(feedbackData: FeedbackSchema) {
       ...feedbackData,
       student_id: user.id,
     },
-  ]);
+  ]).select().single();
 
-  return { data, error };
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
 }
