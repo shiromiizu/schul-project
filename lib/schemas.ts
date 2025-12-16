@@ -12,6 +12,9 @@ export const registerSchema = z.object({
     .email({ message: 'Ungültige E-Mail-Adresse' })
     .refine(
       (email) => {
+        if (process.env.NEXT_PUBLIC_IGNORE_EMAIL_DOMAIN === 'true' || process.env.NEXT_PUBLIC_IGNORE_EMAIL_DOMAIN === '1') {
+          return true;
+        }
         return email.endsWith('schueler.6072-fuerth.de') || email.endsWith('6072-fuerth.de');
       },
       {
@@ -21,6 +24,12 @@ export const registerSchema = z.object({
   password: z.string().min(6, {
     message: 'Passwort muss mindestens 6 Zeichen lang sein.',
   }),
+  confirmPassword: z.string().min(6, {
+    message: 'Passwort muss mindestens 6 Zeichen lang sein.',
+  }),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwörter stimmen nicht überein",
+  path: ["confirmPassword"],
 });
 
 export const feedbackSchema = z.object({
@@ -40,3 +49,32 @@ export const feedbackSchema = z.object({
 });
 
 export type FeedbackSchema = z.infer<typeof feedbackSchema>;
+
+export const forgotPasswordSchema = z.object({
+  email: z.string().email({ message: 'Ungültige E-Mail-Adresse' }),
+});
+
+export const updatePasswordSchema = z.object({
+  password: z.string().min(6, {
+    message: 'Passwort muss mindestens 6 Zeichen lang sein.',
+  }),
+  confirmPassword: z.string().min(6, {
+    message: 'Passwort muss mindestens 6 Zeichen lang sein.',
+  }),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwörter stimmen nicht überein",
+  path: ["confirmPassword"],
+});
+
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1, { message: 'Aktuelles Passwort ist erforderlich' }),
+  newPassword: z.string().min(6, {
+    message: 'Passwort muss mindestens 6 Zeichen lang sein.',
+  }),
+  confirmNewPassword: z.string().min(6, {
+    message: 'Passwort muss mindestens 6 Zeichen lang sein.',
+  }),
+}).refine((data) => data.newPassword === data.confirmNewPassword, {
+  message: "Passwörter stimmen nicht überein",
+  path: ["confirmNewPassword"],
+});

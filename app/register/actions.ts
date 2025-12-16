@@ -1,6 +1,5 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { headers } from 'next/headers'
 import { createClient } from '@/utils/supabase/server'
@@ -10,6 +9,7 @@ export type RegisterFormState = {
   errors?: {
     email?: string[]
     password?: string[]
+    confirmPassword?: string[]
     root?: string[]
   }
   message?: string
@@ -19,6 +19,7 @@ export async function signup(prevState: RegisterFormState, formData: FormData): 
   const validatedFields = registerSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
+    confirmPassword: formData.get('confirmPassword'),
   })
 
   if (!validatedFields.success) {
@@ -63,9 +64,10 @@ export async function signup(prevState: RegisterFormState, formData: FormData): 
     if (profileError) {
       // If profile creation fails, we might want to delete the user or log it.
       // For now, we'll return an error.
+      console.error('Profile creation error:', profileError)
       return {
         errors: {
-          root: ['Fehler beim Erstellen des Benutzerprofils: ' + profileError.message],
+          root: ['Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.'],
         },
       }
     }

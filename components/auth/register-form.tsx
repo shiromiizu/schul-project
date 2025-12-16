@@ -27,6 +27,7 @@ export function RegisterForm() {
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
   })
 
@@ -69,6 +70,22 @@ export function RegisterForm() {
                   <FormMessage />
                   {state?.errors?.password && (
                     <p className="text-sm font-medium text-destructive">{state.errors.password[0]}</p>
+                  )}
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Passwort bestätigen</FormLabel>
+                  <FormControl>
+                    <Input type="password" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                  {state?.errors?.confirmPassword && (
+                    <p className="text-sm font-medium text-destructive">{state.errors.confirmPassword[0]}</p>
                   )}
                 </FormItem>
               )}

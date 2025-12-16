@@ -73,6 +73,11 @@ export function LoginForm() {
                 </FormItem>
               )}
             />
+            <div className="flex justify-end">
+              <Link href="/forgot-password" className="text-sm text-muted-foreground hover:underline">
+                Passwort vergessen?
+              </Link>
+            </div>
             {state?.errors?.root && (
               <p className="text-sm font-medium text-destructive">{state.errors.root[0]}</p>
             )}
