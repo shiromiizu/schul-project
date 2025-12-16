@@ -15,15 +15,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { saveFeedback } from '@/app/feedback/action';
+import { saveFeedback } from '@/app/submit-feedback/action';
 import { BackButton } from '@/components/back-button';
+import { toast } from 'sonner';
 
-export default function FeedbackPage() {
+const SubmitFeedbackPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState<{
-    type: 'success' | 'error';
-    text: string;
-  } | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<CategoryValue | ''>('');
   const [showAllErrors, setShowAllErrors] = useState(false);
 
@@ -47,23 +44,33 @@ export default function FeedbackPage() {
 
   const [descriptionLength, setDescriptionLength] = React.useState(0);
 
-  const onSubmit = async (data: FeedbackSchema) => {
+  const onSubmit = async (feedbackData: FeedbackSchema) => {
     setIsSubmitting(true);
-    setSubmitMessage(null);
 
-    await saveFeedback(data);
-    reset();
-    setShowAllErrors(false);
-    setSelectedCategory('');
-    setDescriptionLength(0);
-    setIsSubmitting(false);
+    toast.promise(saveFeedback(feedbackData), {
+      loading: 'Loading...',
+      success: () => {
+        reset();
+        setShowAllErrors(false);
+        setSelectedCategory('');
+        setDescriptionLength(0);
+        setIsSubmitting(false);
+        return 'Feedback erfolgreich übermittelt!';
+      },
+      error: (err) => {
+        setIsSubmitting(false);
+        return 'Fehler beim Senden des Feedbacks: ' + (err?.message || 'Unbekannter Fehler');
+      },
+    });
   };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setShowAllErrors(true);
-    await trigger();
-    await handleSubmit(onSubmit)(e);
+    const isValid = await trigger();
+    if (isValid) {
+      await handleSubmit(onSubmit)(e);
+    }
   };
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -171,17 +178,6 @@ export default function FeedbackPage() {
                 </span>
               </div>
             </div>
-            {submitMessage && (
-              <div
-                className={`p-4 rounded-md ${
-                  submitMessage.type === 'success'
-                    ? 'bg-green-50 text-green-800 border border-green-200'
-                    : 'bg-red-50 text-red-800 border border-red-200'
-                }`}
-              >
-                {submitMessage.text}
-              </div>
-            )}
             <div className="pt-4">
               <Button type="submit" className="w-full py-3 text-base font-medium">
                 {isSubmitting ? 'Wird gesendet...' : 'Feedback absenden'}
@@ -192,4 +188,6 @@ export default function FeedbackPage() {
       </div>
     </div>
   );
-}
+};
+
+export default SubmitFeedbackPage;
