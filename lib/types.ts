@@ -37,3 +37,13 @@ export function getRoleLabel(role?: string | null) {
   const found = roleOptions.find((r) => r.value === role);
   return found ? found.label : role;
 }
+
+export type Feedback = {
+  id: string;
+  student_id: string;
+  category: CategoryValue;
+  title: string;
+  description: string;
+  seenByTeacher: boolean;
+  created_at: Date;
+};
