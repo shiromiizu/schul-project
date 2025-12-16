@@ -16,14 +16,18 @@ export async function saveFeedback(feedbackData: FeedbackSchema) {
     throw new Error('Nicht authentifiziert');
   }
 
-  const { error } = await supabase.from('feedback').insert([
-    {
-      ...feedbackData,
-      student_id: user.id,
-    },
-  ]).select().single();
+  const { data, error } = await supabase
+    .from('feedback')
+    .insert([
+      {
+        ...feedbackData,
+        student_id: user.id,
+      },
+    ])
+    .select()
+    .single();
 
-  await notifyTeacherFeedback(feedbackData);
+  await notifyTeacherFeedback(data);
 
-  return { feedbackData, error };
+  return { data, error };
 }

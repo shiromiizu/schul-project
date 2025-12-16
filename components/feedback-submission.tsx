@@ -54,18 +54,22 @@ export const FeedbackSubmission = () => {
 
     toast.promise(saveFeedback(feedbackData), {
       loading: 'Loading...',
-      success: (data) => {
+      success: (result) => {
+        if (result.error) {
+          setIsSubmitting(false);
+          return 'Fehler beim Senden des Feedbacks';
+        }
         reset();
         setShowAllErrors(false);
         setSelectedCategory('');
         setDescriptionLength(0);
         setIsSubmitting(false);
-        router.push(`/feedback/${data.id}`);
+        router.push(`/feedback/${result.data.id}`);
         return 'Feedback erfolgreich übermittelt!';
       },
-      error: (err) => {
+      error: () => {
         setIsSubmitting(false);
-        return 'Fehler beim Senden des Feedbacks: ' + (err?.message || 'Unbekannter Fehler');
+        return 'Fehler beim Senden des Feedbacks';
       },
     });
   };
