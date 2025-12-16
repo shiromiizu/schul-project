@@ -27,6 +27,7 @@ export function RegisterForm() {
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
   })
 
@@ -35,7 +36,7 @@ export function RegisterForm() {
       <CardHeader>
         <CardTitle className="text-2xl">Registrieren</CardTitle>
         <CardDescription>
-          Erstellen Sie ein neues Konto. E-Mail muss auf "schueler.6072-fuerth.de" oder "6072-fuerth.de" enden.
+          Erstellen Sie ein neues Konto. E-Mail muss auf &#34;schueler.6072-fuerth.de&#34; oder &#34;6072-fuerth.de&#34; enden.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -69,6 +70,22 @@ export function RegisterForm() {
                   <FormMessage />
                   {state?.errors?.password && (
                     <p className="text-sm font-medium text-destructive">{state.errors.password[0]}</p>
+                  )}
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Passwort bestätigen</FormLabel>
+                  <FormControl>
+                    <Input type="password" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                  {state?.errors?.confirmPassword && (
+                    <p className="text-sm font-medium text-destructive">{state.errors.confirmPassword[0]}</p>
                   )}
                 </FormItem>
               )}
