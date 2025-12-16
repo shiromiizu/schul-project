@@ -4,6 +4,7 @@ import { User } from "@supabase/supabase-js"
 import { LogOut, User as UserIcon, KeyRound } from "lucide-react"
 import { logout } from "@/app/actions"
 import { Button } from "@/components/ui/button"
+import { getRoleLabel } from "@/lib/types"
 import Link from "next/link"
 import { useState } from "react"
 import { ChangePasswordDialog } from "@/components/auth/change-password-dialog"
@@ -19,9 +20,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 interface UserMenuProps {
   user: User | null
+  role?: string | null
 }
 
-export function UserMenu({ user }: UserMenuProps) {
+export function UserMenu({ user, role }: UserMenuProps) {
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false)
 
   if (!user) {
@@ -31,6 +33,8 @@ export function UserMenu({ user }: UserMenuProps) {
       </Button>
     )
   }
+
+  const roleLabel = getRoleLabel(role)
 
   return (
     <>
@@ -45,7 +49,16 @@ export function UserMenu({ user }: UserMenuProps) {
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>{user.email}</DropdownMenuLabel>
+          <DropdownMenuLabel>
+            <div className="flex flex-col space-y-1">
+              <p className="text-sm font-medium leading-none">{user.email}</p>
+              {roleLabel && (
+                <p className="text-xs leading-none text-muted-foreground">
+                  {roleLabel}
+                </p>
+              )}
+            </div>
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setIsChangePasswordOpen(true)}>
             <KeyRound className="mr-2 h-4 w-4" />

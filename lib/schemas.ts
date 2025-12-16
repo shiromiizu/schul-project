@@ -12,6 +12,9 @@ export const registerSchema = z.object({
     .email({ message: 'Ungültige E-Mail-Adresse' })
     .refine(
       (email) => {
+        if (process.env.NEXT_PUBLIC_IGNORE_EMAIL_DOMAIN === 'true' || process.env.NEXT_PUBLIC_IGNORE_EMAIL_DOMAIN === '1') {
+          return true;
+        }
         return email.endsWith('schueler.6072-fuerth.de') || email.endsWith('6072-fuerth.de');
       },
       {
