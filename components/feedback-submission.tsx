@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { saveFeedback } from '@/app/submit-feedback/action';
+import { saveFeedback } from '@/app/student/submit-feedback/action';
 import { BackButton } from '@/components/back-button';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -64,7 +64,7 @@ export const FeedbackSubmission = () => {
         setSelectedCategory('');
         setDescriptionLength(0);
         setIsSubmitting(false);
-        router.push(`/feedback/${result.data.id}`);
+        router.push(`/student/feedback/${result.data.id}`);
         return 'Feedback erfolgreich übermittelt!';
       },
       error: () => {

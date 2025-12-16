@@ -1,38 +1,34 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CategoryRecord } from "@/lib/types"
-import Link from "next/link"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CategoryRecord } from '@/lib/types';
+import Link from 'next/link';
 
 type Feedback = {
-  id: string
-  category: string
-  title: string
-  description: string
-  created_at: string
-  seen_by_teacher: boolean
-}
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  created_at: string;
+  seen_by_teacher: boolean;
+};
 
 interface FeedbackListProps {
-  feedbacks: Feedback[]
+  feedbacks: Feedback[];
 }
 
 export function FeedbackList({ feedbacks }: FeedbackListProps) {
   const getCategoryLabel = (categoryValue: string) => {
-    const category = Object.values(CategoryRecord).find(c => c.value === categoryValue)
-    return category ? category.label : categoryValue
-  }
+    const category = Object.values(CategoryRecord).find((c) => c.value === categoryValue);
+    return category ? category.label : categoryValue;
+  };
 
   if (feedbacks.length === 0) {
-    return (
-      <div className="text-center text-muted-foreground py-8">
-        Keine Feedbacks gefunden.
-      </div>
-    )
+    return <div className="text-center text-muted-foreground py-8">Keine Feedbacks gefunden.</div>;
   }
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {feedbacks.map((feedback) => (
-        <Link key={feedback.id} href={`/feedback/${feedback.id}`} className="block h-full">
+        <Link key={feedback.id} href={`/student/feedback/${feedback.id}`} className="block h-full">
           <Card className="h-full hover:shadow-md transition-shadow">
             <CardHeader>
               <div className="flex justify-between items-start gap-2">
@@ -49,18 +45,16 @@ export function FeedbackList({ feedbacks }: FeedbackListProps) {
                   month: 'long',
                   day: 'numeric',
                   hour: '2-digit',
-                  minute: '2-digit'
+                  minute: '2-digit',
                 })}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground line-clamp-3">
-                {feedback.description}
-              </p>
+              <p className="text-sm text-muted-foreground line-clamp-3">{feedback.description}</p>
             </CardContent>
           </Card>
         </Link>
       ))}
     </div>
-  )
+  );
 }
