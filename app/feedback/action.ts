@@ -2,7 +2,7 @@
 
 import { createClient } from '@/utils/supabase/server';
 import { FeedbackSchema } from '@/lib/schemas';
-import {notifyTeacherFeedback, sendMail} from '@/lib/send-mail'
+import {notifyTeacherFeedback} from '@/lib/send-mail'
 
 export async function saveFeedback(data: FeedbackSchema) {
   const supabase = await createClient();
@@ -27,5 +27,5 @@ export async function saveFeedback(data: FeedbackSchema) {
     throw new Error('Fehler beim Speichern des Feedbacks: ' + error.message);
   }
 
-  const result = await notifyTeacherFeedback(data);
+  const result = await notifyTeacherFeedback(data, String(user.email));
 }
