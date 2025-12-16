@@ -1,40 +1,40 @@
-"use client"
+'use client';
 
-import { User } from "@supabase/supabase-js"
-import { LogOut, User as UserIcon, KeyRound } from "lucide-react"
-import { logout } from "@/app/actions"
-import { Button } from "@/components/ui/button"
-import { getRoleLabel } from "@/lib/types"
-import Link from "next/link"
-import { useState } from "react"
-import { ChangePasswordDialog } from "@/components/auth/change-password-dialog"
+import {User} from '@supabase/supabase-js';
+import {KeyRound, LogOut, User as UserIcon} from 'lucide-react';
+import {logout} from '@/app/actions';
+import {Button} from '@/components/ui/button';
+import {getRoleLabel} from '@/lib/types';
+import Link from 'next/link';
+import {useState} from 'react';
+import {ChangePasswordDialog} from '@/components/auth/change-password-dialog';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
 
 interface UserMenuProps {
-  user: User | null
-  role?: string | null
+  user: User | null;
+  role?: string | null;
 }
 
 export function UserMenu({ user, role }: UserMenuProps) {
-  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false)
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
 
   if (!user) {
     return (
       <Button asChild variant="ghost">
         <Link href="/login">Anmelden</Link>
       </Button>
-    )
+    );
   }
 
-  const roleLabel = getRoleLabel(role)
+  const roleLabel = getRoleLabel(role);
 
   return (
     <>
@@ -53,13 +53,21 @@ export function UserMenu({ user, role }: UserMenuProps) {
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">{user.email}</p>
               {roleLabel && (
-                <p className="text-xs leading-none text-muted-foreground">
-                  {roleLabel}
-                </p>
+                <p className="text-xs leading-none text-muted-foreground">{roleLabel}</p>
               )}
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
+          {role === 'teacher' && (
+            <>
+              <DropdownMenuItem asChild>
+                <Link href="/teacher/feedbacks" className="cursor-pointer w-full">
+                  Feedback Übersicht
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+            </>
+          )}
           <DropdownMenuItem onClick={() => setIsChangePasswordOpen(true)}>
             <KeyRound className="mr-2 h-4 w-4" />
             <span>Passwort ändern</span>
@@ -71,5 +79,5 @@ export function UserMenu({ user, role }: UserMenuProps) {
         </DropdownMenuContent>
       </DropdownMenu>
     </>
-  )
+  );
 }
