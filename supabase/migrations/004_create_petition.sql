@@ -1,4 +1,5 @@
-import (pet)
+import
+(pet)
 
 -- FEEDBACK Table
 create table public.feedback
@@ -8,7 +9,8 @@ create table public.feedback
     title       text not null,
     description text not null,
     status      text not null            default 'In Prüfung',
-    votes       integer                  default 0,
+    upvotes     integer                  default 0,
+    downvotes   integer                  default 0,
     expires_at  timestamp with time zone default (now() + interval '3 months'),
     created_at  timestamp with time zone default now()
 );
