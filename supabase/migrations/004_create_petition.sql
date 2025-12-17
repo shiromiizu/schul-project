@@ -1,20 +1,25 @@
-import
-(pet)
+-- PETITIONS Table
+-- Speichert alle eingereichten Verbesserungsvorschläge / Petitionen
 
--- FEEDBACK Table
-create table public.feedback
+create table public.petitions
 (
     id          uuid primary key         default gen_random_uuid(),
-    student_id  uuid not null references public.profiles (id) on delete cascade,
+
+    -- Technischer Ersteller (anonym in der UI)
+    creator_id  uuid not null references public.profiles (id) on delete cascade,
+
     title       text not null,
     description text not null,
-    status      text not null            default 'In Prüfung',
-    upvotes     integer                  default 0,
-    downvotes   integer                  default 0,
-    expires_at  timestamp with time zone default (now() + interval '3 months'),
-    created_at  timestamp with time zone default now()
+
+    -- Status der Petition
+    status      text not null
+        check (status in ('pending', 'approved', 'rejected'))
+                                         default 'pending',
+
+    created_at  timestamp with time zone default now(),
+    updated_at  timestamp with time zone default now()
 );
 
--- Indexes
-create index petition_student_id_idx on public.petition (student_id);
-create index petition_created_at_idx on public.petition (created_at desc);
+-- Indexe für häufige Abfragen
+create index petitions_status_idx on public.petitions (status);
+create index petitions_creator_idx on public.petitions (creator_id);
