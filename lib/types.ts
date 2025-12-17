@@ -44,7 +44,7 @@ export type Feedback = {
   category: CategoryValue;
   title: string;
   description: string;
-  seenByTeacher: boolean;
+  seen_by_teacher: boolean;
   created_at: Date;
 };
 

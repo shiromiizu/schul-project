@@ -26,7 +26,7 @@ export function FeedbackList({ feedbacks }: FeedbackListProps) {
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {feedbacks.map((feedback) => (
         <Link key={feedback.id} href={`/feedback/${feedback.id}`} className="block h-full">
           <Card className="h-full hover:shadow-md transition-shadow">

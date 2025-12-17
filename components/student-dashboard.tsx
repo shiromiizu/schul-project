@@ -11,7 +11,7 @@ type Props = {
 
 const StudentDashboard = ({ feedbacks }: Props) => {
   return (
-    <div className="w-4/5 mx-auto my-6">
+    <div className="my-6">
       <div className="space-y-6">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 text-center">
           <LinkCard
@@ -51,7 +51,7 @@ const StudentDashboard = ({ feedbacks }: Props) => {
             ) : (
               feedbacks.map((feedback, index) => {
                 if (index >= 3) return;
-                const isOpen = !feedback.seenByTeacher;
+                const isOpen = !feedback.seen_by_teacher;
                 return (
                   <Link key={feedback.id} href={`/feedback/${feedback.id}`} className="block">
                     <Card className="border hover:shadow-md transition-shadow">
