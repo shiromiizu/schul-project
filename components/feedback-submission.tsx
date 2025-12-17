@@ -26,7 +26,6 @@ import { useRouter } from 'next/navigation';
 export const FeedbackSubmission = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<CategoryValue | ''>('');
   const [showAllErrors, setShowAllErrors] = useState(false);
 
   const {
@@ -36,17 +35,19 @@ export const FeedbackSubmission = () => {
     reset,
     setValue,
     trigger,
+    watch,
   } = useForm<FeedbackSchema>({
     resolver: zodResolver(feedbackSchema),
     mode: 'onTouched',
     reValidateMode: 'onChange',
     defaultValues: {
-      category: '' as CategoryValue,
+      category: undefined,
       title: '',
       description: '',
     },
   });
 
+  const selectedCategory = watch('category');
   const [descriptionLength, setDescriptionLength] = React.useState(0);
 
   const onSubmit = async (feedbackData: FeedbackSchema) => {
@@ -61,7 +62,6 @@ export const FeedbackSubmission = () => {
         }
         reset();
         setShowAllErrors(false);
-        setSelectedCategory('');
         setDescriptionLength(0);
         setIsSubmitting(false);
         router.push(`/feedback/${result.data.id}`);
@@ -124,7 +124,6 @@ export const FeedbackSubmission = () => {
                 <Select
                   value={selectedCategory}
                   onValueChange={(value) => {
-                    setSelectedCategory(value as CategoryValue);
                     setValue('category', value as CategoryValue, {
                       shouldValidate: true,
                       shouldDirty: true,

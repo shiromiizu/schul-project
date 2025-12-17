@@ -55,6 +55,16 @@ export const feedbackSchema = z.object({
 
 export type FeedbackSchema = z.infer<typeof feedbackSchema>;
 
+export const replySchema = z.object({
+  message: z
+    .string({ message: 'Bitte geben Sie eine Antwort ein.' })
+    .min(10, { message: 'Die Antwort muss mindestens 10 Zeichen lang sein.' })
+    .max(1000, { message: 'Die Antwort darf maximal 1000 Zeichen lang sein.' })
+    .trim(),
+});
+
+export type ReplySchema = z.infer<typeof replySchema>;
+
 export const forgotPasswordSchema = z.object({
   email: z.string().email({ message: 'Ungültige E-Mail-Adresse' }),
 });
