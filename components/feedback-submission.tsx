@@ -95,7 +95,7 @@ export const FeedbackSubmission = () => {
           <h1 className="text-3xl font-bold text-foreground mb-2">Feedback einreichen</h1>
           <p className="text-muted-foreground mb-8">Teilen Sie uns Ihr Feedback mit.</p>
           <form onSubmit={handleFormSubmit} className="space-y-6">
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-col lg:flex-row">
               <div className="flex-1">
                 <label htmlFor="title" className="block text-sm font-medium text-foreground mb-2">
                   Titel <span className="text-destructive">*</span>

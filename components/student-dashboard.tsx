@@ -11,7 +11,7 @@ type Props = {
 
 const StudentDashboard = ({ feedbacks }: Props) => {
   return (
-    <div className="my-6">
+    <div className="my-6 pb-14">
       <div className="space-y-6">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 text-center">
           <LinkCard
