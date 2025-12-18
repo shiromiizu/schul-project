@@ -1,5 +1,5 @@
-import {z} from 'zod';
-import {Category} from '@/lib/types';
+import { z } from 'zod';
+import { Category } from '@/lib/types';
 
 export const loginSchema = z.object({
   email: z.string().email({ message: 'Ungültige E-Mail-Adresse' }),
@@ -97,3 +97,18 @@ export const changePasswordSchema = z
     message: 'Passwörter stimmen nicht überein',
     path: ['confirmNewPassword'],
   });
+
+export const petitionSchema = z.object({
+  title: z
+    .string({ message: 'Bitte geben Sie einen Titel ein.' })
+    .min(1, { message: 'Der Titel darf nicht leer sein.' })
+    .max(100, { message: 'Der Titel darf maximal 100 Zeichen lang sein.' })
+    .trim(),
+  description: z
+    .string({ message: 'Bitte geben Sie eine Beschreibung ein.' })
+    .min(10, { message: 'Die Beschreibung muss mindestens 10 Zeichen lang sein.' })
+    .max(1000, { message: 'Die Beschreibung darf maximal 1000 Zeichen lang sein.' })
+    .trim(),
+});
+
+export type PetitionSchema = z.infer<typeof petitionSchema>;
