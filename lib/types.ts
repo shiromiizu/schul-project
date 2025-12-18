@@ -63,10 +63,9 @@ export type PetitionStatus = 'pending' | 'approved' | 'rejected';
 
 export type Petition = {
   id: string;
+  creator_id: string;
   title: string;
   description: string;
   status: PetitionStatus;
-  created_at: Date;
-  student_name: string;
-  votes: number;
+  created_at: string;
 };
