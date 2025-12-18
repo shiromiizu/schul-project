@@ -24,7 +24,6 @@ export async function addReply(feedbackId: string, message: string) {
   } = await supabase.auth.getUser();
   if (!user) throw new Error('Not authenticated');
 
-  // Insert reply
   const { error: replyError } = await supabase.from('feedback_replies').insert({
     feedback_id: feedbackId,
     teacher_id: user.id,
@@ -33,7 +32,6 @@ export async function addReply(feedbackId: string, message: string) {
 
   if (replyError) throw replyError;
 
-  // Update seen_by_teacher to true (implied by answering)
   const { error: updateError } = await supabase
     .from('feedback')
     .update({ seen_by_teacher: true })

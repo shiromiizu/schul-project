@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 const PetitionsPage = async () => {
-  const approvedPetitions = await fetchApprovedPetitions(); // Placeholder for fetched petitions
+  const approvedPetitions = await fetchApprovedPetitions();
 
   return (
     <div className="mx-auto py-8">

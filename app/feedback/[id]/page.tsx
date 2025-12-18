@@ -23,7 +23,6 @@ export default async function FeedbackDetailPage({ params }: PageProps) {
     redirect('/login');
   }
 
-  // Fetch user profile for role
   const { data: profile } = await supabase
     .from('profiles')
     .select('role')
@@ -32,7 +31,6 @@ export default async function FeedbackDetailPage({ params }: PageProps) {
 
   const isTeacher = profile?.role === 'teacher';
 
-  // Fetch feedback
   const { data: feedback, error } = await supabase
     .from('feedback')
     .select('*')
@@ -43,12 +41,10 @@ export default async function FeedbackDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  // Access control
   if (!isTeacher && feedback.student_id !== user.id) {
-    redirect('/'); // Or 403 page
+    redirect('/');
   }
 
-  // Fetch replies
   const { data: replies } = await supabase
     .from('feedback_replies')
     .select('*')
