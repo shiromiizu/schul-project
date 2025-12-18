@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server"
 import { requireRole } from "@/utils/auth"
 import { FeedbackFilters } from "@/components/teacher/feedback-filters"
 import { FeedbackList } from "@/components/feedback-list"
+import { BackButton } from "@/components/back-button"
 
 interface PageProps {
   searchParams: Promise<{
@@ -56,6 +57,7 @@ export default async function TeacherFeedbacksPage({ searchParams }: PageProps) 
 
   return (
     <div className="container mx-auto py-8 px-4">
+      <BackButton className="mb-4" />
       <h1 className="text-3xl font-bold mb-8">Feedback Übersicht</h1>
       
       <FeedbackFilters />

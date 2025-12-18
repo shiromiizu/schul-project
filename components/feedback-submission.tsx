@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { saveFeedback } from '@/app/submit-feedback/action';
+import { saveFeedback } from '@/app/student/submit-feedback/action';
 import { BackButton } from '@/components/back-button';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -26,7 +26,6 @@ import { useRouter } from 'next/navigation';
 export const FeedbackSubmission = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<CategoryValue | ''>('');
   const [showAllErrors, setShowAllErrors] = useState(false);
 
   const {
@@ -36,17 +35,19 @@ export const FeedbackSubmission = () => {
     reset,
     setValue,
     trigger,
+    watch,
   } = useForm<FeedbackSchema>({
     resolver: zodResolver(feedbackSchema),
     mode: 'onTouched',
     reValidateMode: 'onChange',
     defaultValues: {
-      category: '' as CategoryValue,
+      category: undefined,
       title: '',
       description: '',
     },
   });
 
+  const selectedCategory = watch('category');
   const [descriptionLength, setDescriptionLength] = React.useState(0);
 
   const onSubmit = async (feedbackData: FeedbackSchema) => {
@@ -61,7 +62,6 @@ export const FeedbackSubmission = () => {
         }
         reset();
         setShowAllErrors(false);
-        setSelectedCategory('');
         setDescriptionLength(0);
         setIsSubmitting(false);
         router.push(`/feedback/${result.data.id}`);
@@ -95,7 +95,7 @@ export const FeedbackSubmission = () => {
           <h1 className="text-3xl font-bold text-foreground mb-2">Feedback einreichen</h1>
           <p className="text-muted-foreground mb-8">Teilen Sie uns Ihr Feedback mit.</p>
           <form onSubmit={handleFormSubmit} className="space-y-6">
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-col lg:flex-row">
               <div className="flex-1">
                 <label htmlFor="title" className="block text-sm font-medium text-foreground mb-2">
                   Titel <span className="text-destructive">*</span>
@@ -124,7 +124,6 @@ export const FeedbackSubmission = () => {
                 <Select
                   value={selectedCategory}
                   onValueChange={(value) => {
-                    setSelectedCategory(value as CategoryValue);
                     setValue('category', value as CategoryValue, {
                       shouldValidate: true,
                       shouldDirty: true,

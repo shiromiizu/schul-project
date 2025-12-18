@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { format } from "date-fns"
 import { de } from "date-fns/locale"
 import { CategoryRecord } from "@/lib/types"
+import { cn } from "@/lib/utils"
 
 interface FeedbackInfoProps {
   feedback: any // Replace with proper type
@@ -14,14 +15,23 @@ export function FeedbackInfo({ feedback, isTeacher, isAnswered }: FeedbackInfoPr
   const categoryLabel = Object.values(CategoryRecord).find(c => c.value === feedback.category)?.label || feedback.category
 
   return (
-    <Card className="mb-8">
-      <CardHeader>
+    <Card className="mb-8 border-[0.5px] shadow-sm">
+      <CardHeader className="p-4 pb-2">
         <div className="flex justify-between items-start gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2 mb-2">
               <Badge variant="outline">{categoryLabel}</Badge>
-              {feedback.seen_by_teacher && <Badge variant="secondary">Gelesen</Badge>}
-              {isAnswered && <Badge className="bg-green-500 hover:bg-green-600">Beantwortet</Badge>}
+              <Badge 
+                variant={feedback.seen_by_teacher ? "default" : "secondary"}
+                className={cn(
+                  "whitespace-nowrap border-transparent",
+                  feedback.seen_by_teacher 
+                    ? "bg-green-100 text-green-800 hover:bg-green-200" 
+                    : "bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
+                )}
+              >
+                {feedback.seen_by_teacher ? "Gesehen" : "Offen"}
+              </Badge>
             </div>
             <CardTitle className="text-2xl">{feedback.title}</CardTitle>
             <CardDescription>
@@ -35,7 +45,7 @@ export function FeedbackInfo({ feedback, isTeacher, isAnswered }: FeedbackInfoPr
           </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-4 pt-0">
         <div className="prose dark:prose-invert max-w-none">
           <p className="whitespace-pre-wrap">{feedback.description}</p>
         </div>

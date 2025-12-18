@@ -21,25 +21,31 @@ export async function Header() {
   }
 
   return (
-    <header className="w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
-      <div className="w-full flex h-14 items-center justify-between px-4">
-        <div className="mr-4 flex">
-          <Link href="/" className="flex hover:opacity-80 transition-opacity">
-            <Image
-              src={'/b3echo-grafitti.svg'}
-              alt={'B3Echo'}
-              width={140}
-              height={0}
-              className={'dark:invert-100'}
-            />
-          </Link>
+    <div
+      className={
+        'w-full h-[60px] border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm'
+      }
+    >
+      <header className=" mx-auto">
+        <div className="w-full flex h-14 items-center justify-between pr-4">
+          <div className="mr-4 flex">
+            <Link href="/" className="flex hover:opacity-80 transition-opacity">
+              <Image
+                src={'/b3echo-grafitti.svg'}
+                alt={'B3Echo'}
+                width={140}
+                height={0}
+                className={'dark:invert-100 mt-1'}
+              />
+            </Link>
+          </div>
+          <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+            <div className="w-full flex-1 md:w-auto md:flex-none"></div>
+            <ModeToggle />
+            <UserMenu user={user} role={role} />
+          </div>
         </div>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none"></div>
-          <ModeToggle />
-          <UserMenu user={user} role={role} />
-        </div>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }

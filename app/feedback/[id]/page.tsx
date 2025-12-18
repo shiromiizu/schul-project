@@ -61,7 +61,7 @@ export default async function FeedbackDetailPage({ params }: PageProps) {
     <div className="container max-w-3xl py-8 mx-auto">
       <div className="mb-6">
         <Button variant="ghost" asChild className="pl-0 hover:bg-transparent">
-          <Link href={isTeacher ? '/teacher/feedbacks' : '/dashboard'}>
+          <Link href={isTeacher ? '/teacher/feedbacks' : '/student'}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Zurück zur Übersicht
           </Link>

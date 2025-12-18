@@ -19,6 +19,8 @@ export function FeedbackInteraction({ feedbackId, isTeacher, seenByTeacher }: Fe
 
   if (!isTeacher) return null
 
+  const isValid = replyMessage.trim().length >= 10 && replyMessage.trim().length <= 1000;
+
   const handleMarkAsRead = async () => {
     try {
       setIsSubmitting(true)
@@ -32,7 +34,7 @@ export function FeedbackInteraction({ feedbackId, isTeacher, seenByTeacher }: Fe
   }
 
   const handleReply = async () => {
-    if (!replyMessage.trim()) return
+    if (!isValid) return
 
     try {
       setIsSubmitting(true)
@@ -64,13 +66,24 @@ export function FeedbackInteraction({ feedbackId, isTeacher, seenByTeacher }: Fe
 
       <div className="space-y-4">
         <h4 className="text-sm font-medium">Antworten</h4>
-        <Textarea
-          placeholder="Schreiben Sie eine Antwort..."
-          value={replyMessage}
-          onChange={(e) => setReplyMessage(e.target.value)}
-          rows={4}
-        />
-        <Button onClick={handleReply} disabled={isSubmitting || !replyMessage.trim()}>
+        <div className="space-y-2">
+          <Textarea
+            placeholder="Schreiben Sie eine Antwort (10-1000 Zeichen)..."
+            value={replyMessage}
+            onChange={(e) => setReplyMessage(e.target.value)}
+            rows={4}
+            className={!isValid && replyMessage.length > 0 ? "border-destructive" : ""}
+          />
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span className={replyMessage.length > 0 && replyMessage.length < 10 ? "text-destructive" : ""}>
+              Min. 10 Zeichen
+            </span>
+            <span className={replyMessage.length > 1000 ? "text-destructive" : ""}>
+              {replyMessage.length}/1000
+            </span>
+          </div>
+        </div>
+        <Button onClick={handleReply} disabled={isSubmitting || !isValid}>
           {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
           Antwort senden
         </Button>

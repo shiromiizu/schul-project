@@ -44,7 +44,7 @@ export type Feedback = {
   category: CategoryValue;
   title: string;
   description: string;
-  seenByTeacher: boolean;
+  seen_by_teacher: boolean;
   created_at: Date;
 };
 
@@ -57,4 +57,15 @@ export type FeedbackReply = {
   teacher?: {
     full_name: string;
   };
+};
+
+export type PetitionStatus = 'pending' | 'approved' | 'rejected';
+
+export type Petition = {
+  id: string;
+  creator_id: string;
+  title: string;
+  description: string;
+  status: PetitionStatus;
+  created_at: string;
 };
