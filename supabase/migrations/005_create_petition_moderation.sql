@@ -11,9 +11,6 @@ create table public.petition_moderation
     moderator_id uuid not null
         references public.profiles (id),
 
-    decision     text not null
-        check (decision in ('approved', 'rejected')),
-
     -- Begründung ist verpflichtend
     reason       text not null,
 
