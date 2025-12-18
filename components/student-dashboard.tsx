@@ -21,7 +21,7 @@ const StudentDashboard = ({ feedbacks }: Props) => {
             description="Teilen Sie uns Ihre Meinung mit"
           />
           <LinkCard
-            href="/dashboard/petitions"
+            href="/petitions"
             icon={FileText}
             title="Petitionen ansehen"
             description="Durchsuchen und unterstützen Sie Petitionen"
