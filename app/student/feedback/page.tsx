@@ -8,7 +8,6 @@ export default async function FeedbacksPage() {
   try {
     feedbacks = await getMyFeedbacks();
   } catch (error) {
-    // If authentication fails or other error, redirect to login
     redirect('/login');
   }
 

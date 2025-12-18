@@ -69,3 +69,9 @@ export type Petition = {
   status: PetitionStatus;
   created_at: string;
 };
+
+export type PetitionModeration = {
+  petition_id: string;
+  reason: string;
+  created_at: string;
+};
