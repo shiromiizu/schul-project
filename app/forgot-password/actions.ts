@@ -2,7 +2,7 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { forgotPasswordSchema } from '@/lib/schemas'
-import { headers } from 'next/headers'
+import { getURL } from '@/lib/utils'
 import { redirect } from 'next/navigation'
 
 export type ForgotPasswordFormState = {
@@ -27,10 +27,10 @@ export async function forgotPassword(prevState: ForgotPasswordFormState, formDat
 
   const { email } = validatedFields.data
   const supabase = await createClient()
-  const origin = (await headers()).get('origin')
+  const origin = getURL()
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${origin}/auth/callback?next=/update-password`,
+    redirectTo: `${origin}auth/callback?next=/update-password`,
   })
 
   if (error) {
