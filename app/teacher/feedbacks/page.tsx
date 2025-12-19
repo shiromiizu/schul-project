@@ -47,7 +47,7 @@ export default async function TeacherFeedbacksPage({ searchParams }: PageProps) 
   }
 
   return (
-    <div className="container mx-auto py-8 px-4">
+    <div className="pb-8 pt-4">
       <BackButton className="mb-4" />
       <h1 className="text-3xl font-bold mb-8">Feedback Übersicht</h1>
 

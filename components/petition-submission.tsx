@@ -74,7 +74,7 @@ const PetitionSubmission = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background py-4 px-4 sm:px-6 lg:px-8">
+    <div className={'mt-4'}>
       <div className="max-w-2xl mx-auto">
         <BackButton className="mb-4" />
         <div className="bg-card shadow-md rounded-lg p-8 border border-border">

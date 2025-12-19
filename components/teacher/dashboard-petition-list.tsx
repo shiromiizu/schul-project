@@ -61,11 +61,11 @@ export function DashboardPetitionList({ petitions }: DashboardPetitionListProps)
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-muted-foreground line-clamp-2">{petition.description}</p>
-            <div className="flex gap-2 pt-2">
+            <div className="flex flex-col sm:flex-row gap-2 pt-2">
               <Button
                 size="sm"
                 onClick={() => handleApprove(petition.id)}
-                className="bg-green-600 hover:bg-green-700 flex-1"
+                className="bg-green-600 hover:bg-green-700 flex"
               >
                 <Check className="mr-2 h-4 w-4" />
                 Annehmen
@@ -75,7 +75,7 @@ export function DashboardPetitionList({ petitions }: DashboardPetitionListProps)
                 petitionId={petition.id}
                 onReject={handleReject}
                 trigger={
-                  <Button size="sm" variant="destructive" className="flex-1">
+                  <Button size="sm" variant="destructive" className="flex">
                     <X className="mr-2 h-4 w-4" />
                     Ablehnen
                   </Button>
