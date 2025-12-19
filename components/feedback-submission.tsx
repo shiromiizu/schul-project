@@ -89,7 +89,7 @@ export const FeedbackSubmission = () => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <BackButton className="mb-4" />
+      <BackButton className="mb-4 mt-4" />
       <div className="bg-card shadow-md rounded-lg p-8 border border-border">
         <h1 className="text-3xl font-bold text-foreground mb-2">Feedback einreichen</h1>
         <p className="text-muted-foreground mb-8">Teilen Sie uns Ihr Feedback mit.</p>
