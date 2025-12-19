@@ -12,7 +12,7 @@ export default async function FeedbacksPage() {
   }
 
   return (
-    <div className="mx-auto py-8">
+    <div className="mx-auto pb-8 pt-4">
       <BackButton className="mb-4" />
       <h1 className="text-3xl font-bold mb-6">Meine Feedbacks</h1>
       <FeedbackList feedbacks={feedbacks} />

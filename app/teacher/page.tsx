@@ -11,7 +11,7 @@ export default async function TeacherDashboard() {
   const petitions = await fetchPendingPetitions();
 
   return (
-    <div className="container mx-auto py-8 px-4 max-w-7xl">
+    <div className="py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight mb-2">Lehrer Dashboard</h1>
         <p className="text-muted-foreground">
@@ -19,7 +19,7 @@ export default async function TeacherDashboard() {
         </p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-2 grid-cols-1">
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
