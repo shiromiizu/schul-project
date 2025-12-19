@@ -52,7 +52,7 @@ const statusConfig = {
 
 const StudentDashboard = ({ feedbacks, petitions }: Props) => {
   return (
-    <div className="my-6 pb-14">
+    <div className="mt-4 pb-8">
       <div className="space-y-6">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 text-center">
           <LinkCard

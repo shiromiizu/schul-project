@@ -9,7 +9,7 @@ const PetitionsPage = async () => {
   const approvedPetitions = await fetchApprovedPetitions();
 
   return (
-    <div className="mx-auto py-8">
+    <div className="mx-auto pb-8 pt-4">
       <BackButton className="mb-4" />
       <div className="flex justify-between items-center px-2 mb-6">
         <h1 className="text-3xl font-bold">Aktuelle Petitionen</h1>

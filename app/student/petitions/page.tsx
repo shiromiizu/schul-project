@@ -8,7 +8,7 @@ export default async function StudentPetitionsPage() {
   const petitions = await fetchStudentPetitions();
 
   return (
-    <div className="container mx-auto py-8 px-4 max-w-5xl">
+    <div className={'mt-4'}>
       <BackButton className="mb-4" />
 
       <Card>
